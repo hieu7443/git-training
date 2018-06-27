@@ -1,0 +1,7 @@
+packages/
+CustomFeature/bin/
+CustomFeature/obj/
+CustomMvc/bin/
+CustomMvc/obj/
+TestFeature/bin/
+TestFeature/obj/
