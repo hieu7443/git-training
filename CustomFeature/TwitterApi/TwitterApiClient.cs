@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,13 +54,14 @@ namespace CustomFeature.TwitterApi
                         string url = $"{baseUrl}?{String.Join("&", param.Select(i => $"{i.Key}={i.Value}"))}";
                         client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"Bearer {Token.AccessToken}");
                         HttpResponseMessage response = client.GetAsync(url).Result;
+                        string responseStr = response.Content.ReadAsStringAsync().Result;
                         switch (response.StatusCode)
                         {
                             case System.Net.HttpStatusCode.OK:
-                                statuses = TwitterData.RenderFromTimeline(response.Content.ReadAsAsync<JToken>(new[] { new JsonMediaTypeFormatter() }).Result);
+                                statuses = TwitterData.RenderFromTimeline(JToken.Parse(responseStr));
                                 break;
                             case System.Net.HttpStatusCode.Unauthorized:
-                                TwitterApiError error = response.Content.ReadAsAsync<TwitterApiError>(new[] { new JsonMediaTypeFormatter() }).Result;
+                                TwitterApiError error = JsonConvert.DeserializeObject<TwitterApiError>(responseStr);
                                 if (error?.Messages?.FirstOrDefault(i => i.Code == "89") != null)
                                     retry = true;
                                 break;
@@ -107,7 +109,7 @@ namespace CustomFeature.TwitterApi
                     HttpResponseMessage response = client.PostAsync(url, new FormUrlEncodedContent(form)).Result;
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        token = response.Content.ReadAsAsync<TwitterApiToken>(new[] { new JsonMediaTypeFormatter() }).Result;
+                        token = JsonConvert.DeserializeObject<TwitterApiToken>(response.Content.ReadAsStringAsync().Result);
                         token.AccessToken = HttpUtility.UrlDecode(token.AccessToken);
                     }
                     else
