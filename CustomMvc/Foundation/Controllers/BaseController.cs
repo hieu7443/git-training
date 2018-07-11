@@ -16,7 +16,7 @@ namespace CustomMvc.Foundation.Controllers
         {
             var sitemapNodes = SitemapRepository.GetSitemapNodes(this.Url);
             string xml = SitemapRepository.GetSitemapDocument(sitemapNodes);
-            return this.Content(xml, "text/xml", Encoding.UTF8);
+            return Content(xml, "text/xml", Encoding.UTF8);
         }
         public ActionResult Robots()
         {
@@ -28,7 +28,7 @@ namespace CustomMvc.Foundation.Controllers
             stringBuilder.Append("sitemap: ");
             stringBuilder.AppendLine(this.Url.RouteUrl("Sitemap", null, this.Request.Url.Scheme).TrimEnd('/'));
 
-            return this.Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
+            return Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
         }
     }
 }

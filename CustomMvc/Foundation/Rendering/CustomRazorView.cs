@@ -23,28 +23,6 @@ namespace CustomMvc.Foundation.Rendering
         protected override void RenderView(ViewContext viewContext, TextWriter writer, object instance)
         {
             base.RenderView(viewContext, writer, instance);
-
-            //var view = (BuildManagerCompiledView)viewContext.View;
-            //var context = viewContext.HttpContext;
-            //var path = context.Server.MapPath(view.ViewPath);
-            //var viewName = Path.GetFileNameWithoutExtension(path);
-            //var controller = viewContext.RouteData.GetRequiredString("controller");
-            //var js = context.Server.MapPath(
-            //    string.Format(
-            //        "~/ClientApp/Controllers/{0}/{0}.{1}.js",
-            //        viewName,
-            //        controller
-            //    )
-            //);
-            //if (File.Exists(js))
-            //{
-            //    writer.WriteLine(
-            //        string.Format(
-            //            "<script type=\"text/javascript\">{0}</script>",
-            //            File.ReadAllText(js)
-            //        )
-            //    );
-            //}
         }
     }
 }
