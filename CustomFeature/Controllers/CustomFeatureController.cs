@@ -34,7 +34,7 @@ namespace CustomFeature.Controllers
                         var test7 = test3[0].GetValue<int>("non");
                         var test8 = test3[0].GetObject<TwitterData>("non");
                         var test9 = test3[0].GetObjectArray<TwitterData>("non");
-                        var test10 = test3[0].GetValueArray<int>("none");
+                        var test10 = test3[0].GetValueArray<int>("non");
                     }
                 }
             }

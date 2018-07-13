@@ -10,10 +10,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CustomFeature.dll">
-      <publishTime>07/13/2018 17:13:36</publishTime>
+      <publishTime>07/13/2018 17:22:29</publishTime>
     </File>
     <File Include="bin/CustomFeature.pdb">
-      <publishTime>07/13/2018 17:13:36</publishTime>
+      <publishTime>07/13/2018 17:22:29</publishTime>
     </File>
     <File Include="bin/CustomMvc.dll">
       <publishTime>07/11/2018 11:45:49</publishTime>
