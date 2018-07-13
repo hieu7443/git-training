@@ -1,12 +1,13 @@
 ﻿using CustomFeature.Models;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace CustomFeature.TwitterApi
+namespace CustomFeature.Helpers
 {
     public static class StringExtensions
     {
@@ -75,6 +76,24 @@ namespace CustomFeature.TwitterApi
             {
                 result.Add(prop.Name, GetValue(prop.Value));
             }
+            return result;
+        }
+    }
+    public static class TypeExtensions
+    {
+        public static bool IsEnumberable(this Type type)
+        {
+            return typeof(IEnumerable).IsAssignableFrom(type);
+        }
+        public static T ChangeType<T>(this object value)
+        {
+            T result = default(T);
+            try
+            {
+                if (value != null)
+                    result = (T)Convert.ChangeType(value, typeof(T));
+            }
+            catch { }
             return result;
         }
     }
