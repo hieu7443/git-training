@@ -44,11 +44,22 @@ namespace CustomFeature.Helpers
             List<object> result = new List<object>();
             if (prop.CanRead)
             {
-                index = prop.GetIndex(obj);
-                foreach (object i in index)
+                try
                 {
-                    result.Add(prop.GetValue(obj, new object[] { i }));
+                    index = prop.GetIndex(obj);
+                    if (index != null)
+                    {
+                        foreach (object i in index)
+                        {
+                            result.Add(prop.GetValue(obj, new object[] { i }));
+                        }
+                    }
+                    else
+                    {
+                        result.Add(prop.GetValue(obj, null));
+                    }
                 }
+                catch { }
             }
             return result.ToArray();
         }
@@ -86,8 +97,18 @@ namespace CustomFeature.Helpers
         {
             return arr.Count(i => 
                 prop.Name.ToLower().Contains(i.Name.ToLower()) &&
-                prop.Name.Length <= i.Name.Length + 2
+                prop.Name.Length <= i.Name.Length + 2 &&
+                prop.GetElementType() == i.ParameterType
             ) > 0;
+        }
+        private static Type GetElementType(this PropertyInfo prop)
+        {
+            Type type = prop.PropertyType;
+            if (type.HasElementType)
+                return type.GetElementType();
+            else if (type.GenericTypeArguments != null)
+                return type.GenericTypeArguments.FirstOrDefault();
+            return null;
         }
         private static object[] RenderIndexValues(bool validIndex, List<object[]> indexValues)
         {
