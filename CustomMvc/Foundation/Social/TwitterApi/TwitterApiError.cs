@@ -1,0 +1,21 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace CustomMvc.Foundation.Social
+{
+    public class TwitterApiError
+    {
+        [JsonProperty("errors")]
+        public TwitterApiErrorMessage[] Messages { get; set; }
+    }
+    public class TwitterApiErrorMessage
+    {
+        [JsonProperty("message")]
+        public string Message { get; set; }
+        [JsonProperty("code")]
+        public string Code { get; set; }
+    }
+}

@@ -146,6 +146,7 @@
     <Compile Include="Controllers\CustomFeatureController.cs" />
     <Compile Include="Helpers\ClassMapper.cs" />
     <Compile Include="Models\DynamicObject.cs" />
+    <Compile Include="Models\TwitterObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Extensions.cs" />
     <Compile Include="TwitterApi\TwitterApiClient.cs" />

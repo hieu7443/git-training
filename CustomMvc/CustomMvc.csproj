@@ -156,10 +156,16 @@
     <Compile Include="Foundation\Controllers\BaseController.cs" />
     <Compile Include="Foundation\Controllers\CustomControllerFactory.cs" />
     <Compile Include="Foundation\Extensions\ActionResultExtensions.cs" />
+    <Compile Include="Foundation\Extensions\ClassMapper.cs" />
+    <Compile Include="Foundation\Extensions\ExceptionExtensions.cs" />
     <Compile Include="Foundation\Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Foundation\Extensions\JsonExtensions.cs" />
     <Compile Include="Foundation\Extensions\RequestContextExtensions.cs" />
+    <Compile Include="Foundation\Extensions\StringExtensions.cs" />
     <Compile Include="Foundation\Extensions\TypeExtensions.cs" />
     <Compile Include="Foundation\Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Foundation\Extensions\DynamicObject.cs" />
+    <Compile Include="Foundation\Extensions\XmlExtensions.cs" />
     <Compile Include="Foundation\Helpers\HtmlRendering.cs" />
     <Compile Include="Foundation\Helpers\ResponseCapture.cs" />
     <Compile Include="Foundation\Rendering\CustomRazorView.cs" />
@@ -169,6 +175,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Foundation\Social\TwitterApi\TwitterApiClient.cs" />
+    <Compile Include="Foundation\Social\TwitterApi\TwitterApiError.cs" />
+    <Compile Include="Foundation\Social\TwitterApi\TwitterApiSearchType.cs" />
+    <Compile Include="Foundation\Social\TwitterApi\TwitterApiToken.cs" />
+    <Compile Include="Foundation\Social\TwitterApi\TwitterData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

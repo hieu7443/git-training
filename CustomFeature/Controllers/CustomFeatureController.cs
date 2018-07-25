@@ -1,4 +1,6 @@
-﻿using CustomFeature.TwitterApi;
+﻿using CustomFeature.Models;
+using CustomMvc.Foundation.Social;
+using CustomMvc.Foundation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace CustomFeature.Controllers
     {
         public ActionResult Index()
         {
+            var test = @"D:\Git\Training\demo\Data\test_xml".XmlToJToken().RenderObject<CustomMvc.Foundation.Extensions.DynamicObject>();
+            var test2 = test.ConvertFromDynamic<TwitterObject>();
             return View();
         }
         [HttpGet]
@@ -35,6 +39,7 @@ namespace CustomFeature.Controllers
                         var test8 = test3[0].GetObject<TwitterData>("non");
                         var test9 = test3[0].GetObjectArray<TwitterData>("non");
                         var test10 = test3[0].GetValueArray<int>("non");
+                        var test11 = status.ConvertFromDynamic<TwitterObject>();
                     }
                 }
             }
