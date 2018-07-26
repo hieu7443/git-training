@@ -157,6 +157,7 @@
     <Compile Include="Foundation\Controllers\CustomControllerFactory.cs" />
     <Compile Include="Foundation\Extensions\ActionResultExtensions.cs" />
     <Compile Include="Foundation\Extensions\ClassMapper.cs" />
+    <Compile Include="Foundation\Extensions\DynamicAttributes.cs" />
     <Compile Include="Foundation\Extensions\ExceptionExtensions.cs" />
     <Compile Include="Foundation\Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Foundation\Extensions\JsonExtensions.cs" />

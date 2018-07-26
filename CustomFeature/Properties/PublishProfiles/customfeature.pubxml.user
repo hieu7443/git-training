@@ -10,16 +10,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CustomFeature.dll">
-      <publishTime>07/25/2018 16:46:48</publishTime>
+      <publishTime>07/26/2018 10:23:16</publishTime>
     </File>
     <File Include="bin/CustomFeature.pdb">
-      <publishTime>07/25/2018 16:46:48</publishTime>
+      <publishTime>07/26/2018 10:23:16</publishTime>
     </File>
     <File Include="bin/CustomMvc.dll">
-      <publishTime>07/25/2018 16:46:41</publishTime>
+      <publishTime>07/26/2018 10:23:00</publishTime>
     </File>
     <File Include="bin/CustomMvc.pdb">
-      <publishTime>07/25/2018 16:46:41</publishTime>
+      <publishTime>07/26/2018 10:23:00</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>12/07/2015 19:04:38</publishTime>

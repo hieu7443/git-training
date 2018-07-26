@@ -176,19 +176,28 @@ namespace CustomMvc.Foundation.Extensions
         {
             return prop.GetIndexParameters().Length > 0;
         }
+        private static string GetFieldName(this PropertyInfo prop)
+        {
+            string result = prop.Name;
+            DynamicField attribute = prop.GetCustomAttribute(typeof(DynamicField)) as DynamicField;
+            if (attribute != null)
+                result = attribute.Name;
+            return result;
+        }
         private static object GetValue(this DynamicObject obj, PropertyInfo prop)
         {
             object value = null;
             if (!prop.HasIndex())
             {
+                string propName = prop.GetFieldName();
                 if (prop.IsArray())
                 {
                     value = obj.GetArray(prop);
                 }
-                else if (obj.IsObject(prop.Name))
+                else if (obj.IsObject(propName))
                 {
                     value = prop.PropertyType.CreateInstance();
-                    DynamicObject baseValue = obj.GetObject(prop.Name);
+                    DynamicObject baseValue = obj.GetObject(propName);
                     if (baseValue != null)
                     {
                         foreach (PropertyInfo valueProp in prop.PropertyType.GetProperties().Where(i => i.CanWrite))
@@ -200,7 +209,7 @@ namespace CustomMvc.Foundation.Extensions
                 }
                 else
                 {
-                    value = obj.GetValue(prop.Name);
+                    value = obj.GetValue(propName);
                     if (value != null)
                         value = System.Convert.ChangeType(value, prop.PropertyType);
                 }
@@ -210,24 +219,25 @@ namespace CustomMvc.Foundation.Extensions
         private static Array GetArray(this DynamicObject obj, PropertyInfo prop)
         {
             Type elementType = prop.GetElementType();
-            Array array = Array.CreateInstance(elementType, obj.GetArrayLength(prop.Name));
+            string propName = prop.GetFieldName();
+            Array array = Array.CreateInstance(elementType, obj.GetArrayLength(propName));
             if (array.Length > 0)
             {
-                if (obj.IsObject(prop.Name))
+                if (obj.IsObject(propName))
                 {
-                    array.SetValue(obj.GetObject(prop.Name).ConvertFromDynamic(elementType), 0);
+                    array.SetValue(obj.GetObject(propName).ConvertFromDynamic(elementType), 0);
                 }
-                else if (obj.IsObjectArray(prop.Name))
+                else if (obj.IsObjectArray(propName))
                 {
-                    DynamicObject[] values = obj.GetObjectArray(prop.Name);
+                    DynamicObject[] values = obj.GetObjectArray(propName);
                     for (int i = 0; i < values.Length; i++)
                     {
                         array.SetValue(values[i].ConvertFromDynamic(elementType), i);
                     }
                 }
-                else if (obj.IsArray(prop.Name))
+                else if (obj.IsArray(propName))
                 {
-                    object[] values = obj.GetValueArray(prop.Name);
+                    object[] values = obj.GetValueArray(propName);
                     if (values != null)
                     {
                         for (int i = 0; i < values.Length; i++)
@@ -238,7 +248,7 @@ namespace CustomMvc.Foundation.Extensions
                 }
                 else
                 {
-                    array.SetValue(System.Convert.ChangeType(obj.GetValue(prop.Name), elementType), 0);
+                    array.SetValue(System.Convert.ChangeType(obj.GetValue(propName), elementType), 0);
                 }
             }
             return array;
