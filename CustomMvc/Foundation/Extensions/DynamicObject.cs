@@ -95,5 +95,9 @@ namespace CustomMvc.Foundation.Extensions
         {
             return GetValueArray(key)?.Select(i => i.ChangeType<T>()).ToArray();
         }
+        public static T RenderFromXmlFile<T>(string file) where T : DynamicObject
+        {
+            return file.XmlToJToken().RenderObject<T>();
+        }
     }
 }
