@@ -10,16 +10,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CustomFeature.dll">
-      <publishTime>07/26/2018 10:23:16</publishTime>
+      <publishTime>08/14/2018 17:38:40</publishTime>
     </File>
     <File Include="bin/CustomFeature.pdb">
-      <publishTime>07/26/2018 10:23:16</publishTime>
+      <publishTime>08/14/2018 17:38:40</publishTime>
     </File>
     <File Include="bin/CustomMvc.dll">
-      <publishTime>07/26/2018 10:23:00</publishTime>
+      <publishTime>08/14/2018 17:33:25</publishTime>
     </File>
     <File Include="bin/CustomMvc.pdb">
-      <publishTime>07/26/2018 10:23:00</publishTime>
+      <publishTime>08/14/2018 17:33:25</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>11/04/2015 07:43:42</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>12/07/2015 19:04:38</publishTime>
@@ -118,7 +121,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2018 13:33:17</publishTime>
     </File>
     <File Include="Views/CustomFeature/Index.cshtml">
-      <publishTime>07/11/2018 11:21:24</publishTime>
+      <publishTime>08/14/2018 17:38:19</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>06/04/2018 14:36:19</publishTime>

@@ -15,8 +15,7 @@ namespace CustomMvc
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-            ControllerBuilder.Current.SetControllerFactory(typeof(CustomControllerFactory));
+            Instance.Init();
         }
     }
 }

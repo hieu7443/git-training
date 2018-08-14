@@ -1,5 +1,6 @@
 ﻿using CustomMvc.Foundation.Controllers;
 using CustomMvc.Foundation.Helpers;
+using CustomMvc.Foundation.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,11 +15,15 @@ namespace CustomMvc.Foundation.Extensions
     {
         public static IHtmlString PlaceHolder(this HtmlHelper html, string name)
         {
-            string action = "Index";
-            string controller = "TestFeature.Controllers.TestFeatureController";
-            string assembly = "TestFeature";
-            object[] actionParams = null;
-            return HtmlRendering.InvokeAction(assembly, controller, action, actionParams);
+            Item item = null;
+            using (new RenderSession(item))
+            {
+                string action = "Index";
+                string controller = "TestFeature.Controllers.TestFeatureController";
+                string assembly = "TestFeature";
+                object[] actionParams = null;
+                return HtmlRendering.InvokeAction(assembly, controller, action, actionParams);
+            }
         }
     }
 }

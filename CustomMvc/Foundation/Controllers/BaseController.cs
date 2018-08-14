@@ -12,6 +12,10 @@ namespace CustomMvc.Foundation.Controllers
 {
     public class BaseController : Controller
     {
+        public ActionResult Index()
+        {
+            return View(CustomContext.Layout.Source);
+        }
         public ActionResult Sitemap()
         {
             var sitemapNodes = SitemapRepository.GetSitemapNodes(this.Url);

@@ -30,10 +30,6 @@ namespace CustomMvc.Foundation.Helpers
 
             object controllerInstance = Convert.ChangeType(controller, controllerType);
             MethodInfo action = controllerType.GetMethod(actionName);
-            if (action == null)
-            {
-                // throw some exception
-            }
             ActionResult actionResult = (ActionResult)action.Invoke(controllerInstance, actionParams);
             return new MvcHtmlString(actionResult.Capture(newContext));
         }
