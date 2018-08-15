@@ -5,27 +5,33 @@ using System.Web;
 
 namespace CustomMvc.Foundation.Models
 {
-    public interface ILayout : IBaseItem
+    public interface IRendering : IBaseItem
     {
-        string Source { get; set; }
+        string Assembly { get; set; }
+        string Controller { get; set; }
+        string Action { get; set; }
     }
-    public class Layout : ILayout
+    public class Rendering : IRendering
     {
-        public Layout() { }
-        internal Layout(Database.Layout data)
+        public Rendering() { }
+        internal Rendering(Database.Rendering data)
         {
             if (data != null)
             {
                 ID = data.ID;
                 Name = data.Name;
-                Source = data.Source;
+                Assembly = data.Assembly;
+                Controller = data.Controller;
+                Action = data.Action;
                 Created = data.Created;
                 Updated = data.Updated;
             }
         }
         public Guid ID { get; set; }
         public string Name { get; set; }
-        public string Source { get; set; }
+        public string Assembly { get; set; }
+        public string Controller { get; set; }
+        public string Action { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
     }

@@ -19,7 +19,10 @@ namespace CustomMvc.Foundation.Database
             : base("name=Entities")
         {
         }
-    
+        public Entities(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -29,10 +32,10 @@ namespace CustomMvc.Foundation.Database
         public virtual DbSet<ItemRendering> ItemRenderings { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Layout> Layouts { get; set; }
-        public virtual DbSet<Link> Links { get; set; }
         public virtual DbSet<Presentation> Presentations { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<Rendering> Renderings { get; set; }
         public virtual DbSet<Template> Templates { get; set; }
+        public virtual DbSet<Link> Links { get; set; }
     }
 }

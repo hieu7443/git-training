@@ -17,11 +17,15 @@ namespace CustomMvc.Foundation.Database
         public System.Guid ID { get; set; }
         public System.Guid RenderingID { get; set; }
         public System.Guid PresentationID { get; set; }
-        public System.Guid SourceID { get; set; }
+        public Nullable<System.Guid> SourceID { get; set; }
         public string Name { get; set; }
         public string Placeholder { get; set; }
         public int Index { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
+    
+        public virtual Item Source { get; set; }
+        public virtual Presentation Presentation { get; set; }
+        public virtual Rendering Rendering { get; set; }
     }
 }

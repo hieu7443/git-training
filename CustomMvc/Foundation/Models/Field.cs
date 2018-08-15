@@ -5,28 +5,28 @@ using System.Web;
 
 namespace CustomMvc.Foundation.Models
 {
-    public interface ILayout : IBaseItem
+    public interface IField : IBaseItem
     {
-        string Source { get; set; }
+        Template Template { get; set; }
     }
-    public class Layout : ILayout
+    public class Field : IField
     {
-        public Layout() { }
-        internal Layout(Database.Layout data)
+        public Field() { }
+        internal Field(Database.Field data)
         {
             if (data != null)
             {
                 ID = data.ID;
                 Name = data.Name;
-                Source = data.Source;
                 Created = data.Created;
                 Updated = data.Updated;
+                Template = new Template(data.Template);
             }
         }
         public Guid ID { get; set; }
         public string Name { get; set; }
-        public string Source { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
+        public Template Template { get; set; }
     }
 }

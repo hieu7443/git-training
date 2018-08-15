@@ -25,7 +25,7 @@ namespace CustomMvc.Foundation.Extensions
                         prop.SetValue(result, value);
                     }
                 }
-                catch (Exception ex) { }
+                catch { }
             }
             return result;
         }

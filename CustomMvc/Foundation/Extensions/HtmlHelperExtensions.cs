@@ -15,15 +15,19 @@ namespace CustomMvc.Foundation.Extensions
     {
         public static IHtmlString PlaceHolder(this HtmlHelper html, string name)
         {
-            Item item = null;
-            using (new RenderSession(item))
+            IEnumerable<Models.ItemRendering> renderings = CustomContext.Presentation?.GetRenderings(name);
+            List<IHtmlString> htmls = new List<IHtmlString>();
+            foreach (Models.ItemRendering rendering in renderings)
             {
-                string action = "Index";
-                string controller = "TestFeature.Controllers.TestFeatureController";
-                string assembly = "TestFeature";
-                object[] actionParams = null;
-                return HtmlRendering.InvokeAction(assembly, controller, action, actionParams);
+                using (new RenderSession(rendering))
+                {
+                    string action = rendering.Rendering.Action;
+                    string controller = rendering.Rendering.Controller;
+                    string assembly = rendering.Rendering.Assembly;
+                    htmls.Add(HtmlRendering.InvokeAction(assembly, controller, action, null));
+                }
             }
+            return new HtmlString(String.Join("", htmls));
         }
     }
 }

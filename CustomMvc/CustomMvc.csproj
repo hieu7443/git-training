@@ -222,6 +222,12 @@
     <Compile Include="Foundation\Database\Rendering.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Foundation\Models\Field.cs" />
+    <Compile Include="Foundation\Models\Link.cs" />
+    <Compile Include="Foundation\Models\Presentation.cs" />
+    <Compile Include="Foundation\Models\Property.cs" />
+    <Compile Include="Foundation\Models\Rendering.cs" />
+    <Compile Include="Foundation\Models\Repository.cs" />
     <Compile Include="Foundation\Database\Template.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -246,6 +252,7 @@
     <Compile Include="Foundation\Helpers\ResponseCapture.cs" />
     <Compile Include="Foundation\Models\ItemRendering.cs" />
     <Compile Include="Foundation\Models\Layout.cs" />
+    <Compile Include="Foundation\Models\Template.cs" />
     <Compile Include="Foundation\Rendering\CustomRazorView.cs" />
     <Compile Include="Foundation\Rendering\CustomRazorViewEngine.cs" />
     <Compile Include="Foundation\Rendering\RenderSession.cs" />

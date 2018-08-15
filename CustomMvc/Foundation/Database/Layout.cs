@@ -14,10 +14,19 @@ namespace CustomMvc.Foundation.Database
     
     public partial class Layout
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Layout()
+        {
+            this.Presentations = new HashSet<Presentation>();
+        }
+    
         public System.Guid ID { get; set; }
         public string Name { get; set; }
         public string Source { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Presentation> Presentations { get; set; }
     }
 }

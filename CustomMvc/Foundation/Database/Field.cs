@@ -14,11 +14,21 @@ namespace CustomMvc.Foundation.Database
     
     public partial class Field
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Field()
+        {
+            this.Properties = new HashSet<Property>();
+        }
+    
         public System.Guid ID { get; set; }
         public string Name { get; set; }
         public System.Guid TemplateID { get; set; }
         public string Type { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
+    
+        public virtual Template Template { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Property> Properties { get; set; }
     }
 }

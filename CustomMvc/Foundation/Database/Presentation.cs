@@ -14,10 +14,21 @@ namespace CustomMvc.Foundation.Database
     
     public partial class Presentation
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Presentation()
+        {
+            this.ItemRenderings = new HashSet<ItemRendering>();
+        }
+    
         public System.Guid ID { get; set; }
         public System.Guid ItemID { get; set; }
         public System.Guid LayoutID { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemRendering> ItemRenderings { get; set; }
+        public virtual Item Item { get; set; }
+        public virtual Layout Layout { get; set; }
     }
 }

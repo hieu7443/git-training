@@ -9,11 +9,22 @@
         <EntityTypeShape EntityType="DemoModel.ItemRendering" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoModel.Item" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoModel.Layout" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoModel.Link" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DemoModel.Presentation" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoModel.Presentation" Width="1.5" PointX="3.5" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoModel.Property" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoModel.Rendering" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DemoModel.Template" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="DemoModel.FK_Fields_Templates" />
+        <AssociationConnector Association="DemoModel.FK_Properties_Fields" />
+        <AssociationConnector Association="DemoModel.FK_ItemRenderings_Items" />
+        <AssociationConnector Association="DemoModel.FK_ItemRenderings_Presentations" />
+        <AssociationConnector Association="DemoModel.FK_ItemRenderings_Renderings" />
+        <AssociationConnector Association="DemoModel.FK_Items_Items" />
+        <AssociationConnector Association="DemoModel.FK_Items_Templates" />
+        <AssociationConnector Association="DemoModel.FK_Presentations_Items" />
+        <AssociationConnector Association="DemoModel.FK_Properties_Items" />
+        <AssociationConnector Association="DemoModel.FK_Presentations_Layouts" />
+        <EntityTypeShape EntityType="DemoModel.Link" Width="1.5" PointX="7" PointY="8.5" />
+        <AssociationConnector Association="DemoModel.FK_Links_Items" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

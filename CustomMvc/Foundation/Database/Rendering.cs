@@ -14,6 +14,12 @@ namespace CustomMvc.Foundation.Database
     
     public partial class Rendering
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Rendering()
+        {
+            this.ItemRenderings = new HashSet<ItemRendering>();
+        }
+    
         public System.Guid ID { get; set; }
         public string Name { get; set; }
         public string Assembly { get; set; }
@@ -21,5 +27,8 @@ namespace CustomMvc.Foundation.Database
         public string Action { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemRendering> ItemRenderings { get; set; }
     }
 }

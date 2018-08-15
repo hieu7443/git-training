@@ -19,5 +19,7 @@ namespace CustomMvc.Foundation.Database
         public string Url { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
+    
+        public virtual Item Item { get; set; }
     }
 }

@@ -24,17 +24,17 @@ namespace CustomMvc
             routes.MapRoute(
                 name: "Sitemap",
                 url: "sitemap.xml",
-                defaults: new { controller = "Base", action = "Sitemap" }
+                defaults: new { controller = "_Base", action = "Sitemap" }
             );
             routes.MapRoute(
                 name: "Robots",
                 url: "robots.txt",
-                defaults: new { controller = "Base", action = "Robots" }
+                defaults: new { controller = "_Base", action = "Robots" }
             );
             routes.MapRoute(
                 name: "Default",
                 url: "{*url}",
-                defaults: new { controller = "Base", action = "Index" }
+                defaults: new { controller = "_Base", action = "Index" }
             );
         }
         private static void RegisterConnectionString()
@@ -42,7 +42,8 @@ namespace CustomMvc
             string conn = ConfigurationManager.ConnectionStrings["Entities"]?.ConnectionString;
             if (String.IsNullOrEmpty(conn))
             {
-                conn = "Data Source=NET-HIEUNT;Initial Catalog=Demo;Integrated Security=SSPI";
+                //conn = "Data Source=NET-HIEUNT;Initial Catalog=Demo;Integrated Security=SSPI";
+                conn = "metadata=res://*/Foundation.Database.Models.csdl|res://*/Foundation.Database.Models.ssdl|res://*/Foundation.Database.Models.msl;provider=System.Data.SqlClient;provider connection string='data source=NET-HIEUNT;initial catalog=Demo;Integrated Security=SSPI'";
             }
             Foundation.Database.CustomDbContext.SetConnectionString(conn);
         }

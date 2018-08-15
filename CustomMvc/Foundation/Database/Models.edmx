@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Fields">
           <Key>
             <PropertyRef Name="ID" />
@@ -23,7 +23,7 @@
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RenderingID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PresentationID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SourceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SourceID" Type="uniqueidentifier" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Placeholder" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Index" Type="int" Nullable="false" />
@@ -37,7 +37,7 @@
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="TemplateID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ParentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentID" Type="uniqueidentifier" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="Updated" Type="datetime" Nullable="false" />
         </EntityType>
@@ -104,6 +104,138 @@
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="Updated" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Fields_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="1" />
+          <End Role="Fields" Type="Self.Fields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Fields">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemRenderings_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="ItemRenderings" Type="Self.ItemRenderings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemRenderings">
+              <PropertyRef Name="SourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemRenderings_Presentations">
+          <End Role="Presentations" Type="Self.Presentations" Multiplicity="1" />
+          <End Role="ItemRenderings" Type="Self.ItemRenderings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemRenderings">
+              <PropertyRef Name="PresentationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemRenderings_Renderings">
+          <End Role="Renderings" Type="Self.Renderings" Multiplicity="1" />
+          <End Role="ItemRenderings" Type="Self.ItemRenderings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Renderings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemRenderings">
+              <PropertyRef Name="RenderingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="Items1" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Links_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Links" Type="Self.Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Links">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presentations_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Presentations" Type="Self.Presentations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Presentations">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presentations_Layouts">
+          <End Role="Layouts" Type="Self.Layouts" Multiplicity="1" />
+          <End Role="Presentations" Type="Self.Presentations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layouts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Presentations">
+              <PropertyRef Name="LayoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Fields">
+          <End Role="Fields" Type="Self.Fields" Multiplicity="1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fields">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Properties" Type="Self.Properties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Properties">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DemoModelStoreContainer">
           <EntitySet Name="Fields" EntityType="Self.Fields" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemRenderings" EntityType="Self.ItemRenderings" Schema="dbo" store:Type="Tables" />
@@ -114,9 +246,52 @@
           <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Renderings" EntityType="Self.Renderings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Templates" EntityType="Self.Templates" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Fields_Templates" Association="Self.FK_Fields_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="Fields" EntitySet="Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemRenderings_Items" Association="Self.FK_ItemRenderings_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ItemRenderings" EntitySet="ItemRenderings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemRenderings_Presentations" Association="Self.FK_ItemRenderings_Presentations">
+            <End Role="Presentations" EntitySet="Presentations" />
+            <End Role="ItemRenderings" EntitySet="ItemRenderings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemRenderings_Renderings" Association="Self.FK_ItemRenderings_Renderings">
+            <End Role="Renderings" EntitySet="Renderings" />
+            <End Role="ItemRenderings" EntitySet="ItemRenderings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Items" Association="Self.FK_Items_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Items1" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Templates" Association="Self.FK_Items_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Links_Items" Association="Self.FK_Links_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Links" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presentations_Items" Association="Self.FK_Presentations_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Presentations" EntitySet="Presentations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presentations_Layouts" Association="Self.FK_Presentations_Layouts">
+            <End Role="Layouts" EntitySet="Layouts" />
+            <End Role="Presentations" EntitySet="Presentations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Fields" Association="Self.FK_Properties_Fields">
+            <End Role="Fields" EntitySet="Fields" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Items" Association="Self.FK_Properties_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Properties" EntitySet="Properties" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -130,6 +305,8 @@
           <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Template" Relationship="DemoModel.FK_Fields_Templates" FromRole="Field" ToRole="Template" />
+          <NavigationProperty Name="Properties" Relationship="DemoModel.FK_Properties_Fields" FromRole="Field" ToRole="Property" />
         </EntityType>
         <EntityType Name="ItemRendering">
           <Key>
@@ -138,12 +315,15 @@
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="RenderingID" Type="Guid" Nullable="false" />
           <Property Name="PresentationID" Type="Guid" Nullable="false" />
-          <Property Name="SourceID" Type="Guid" Nullable="false" />
+          <Property Name="SourceID" Type="Guid" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Placeholder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Index" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Source" Relationship="DemoModel.FK_ItemRenderings_Items" FromRole="ItemRendering" ToRole="Item" />
+          <NavigationProperty Name="Presentation" Relationship="DemoModel.FK_ItemRenderings_Presentations" FromRole="ItemRendering" ToRole="Presentation" />
+          <NavigationProperty Name="Rendering" Relationship="DemoModel.FK_ItemRenderings_Renderings" FromRole="ItemRendering" ToRole="Rendering" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
@@ -152,9 +332,16 @@
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TemplateID" Type="Guid" Nullable="false" />
-          <Property Name="ParentID" Type="Guid" Nullable="false" />
+          <Property Name="ParentID" Type="Guid" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ItemRenderings" Relationship="DemoModel.FK_ItemRenderings_Items" FromRole="Item" ToRole="ItemRendering" />
+          <NavigationProperty Name="Childs" Relationship="DemoModel.FK_Items_Items" FromRole="Item" ToRole="Item1" />
+          <NavigationProperty Name="Parent" Relationship="DemoModel.FK_Items_Items" FromRole="Item1" ToRole="Item" />
+          <NavigationProperty Name="Template" Relationship="DemoModel.FK_Items_Templates" FromRole="Item" ToRole="Template" />
+          <NavigationProperty Name="Presentations" Relationship="DemoModel.FK_Presentations_Items" FromRole="Item" ToRole="Presentation" />
+          <NavigationProperty Name="Properties" Relationship="DemoModel.FK_Properties_Items" FromRole="Item" ToRole="Property" />
+          <NavigationProperty Name="Links" Relationship="DemoModel.FK_Links_Items" FromRole="Item" ToRole="Link" />
         </EntityType>
         <EntityType Name="Layout">
           <Key>
@@ -165,16 +352,7 @@
           <Property Name="Source" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="Link">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="ItemID" Type="Guid" Nullable="false" />
-          <Property Name="Url" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Presentations" Relationship="DemoModel.FK_Presentations_Layouts" FromRole="Layout" ToRole="Presentation" />
         </EntityType>
         <EntityType Name="Presentation">
           <Key>
@@ -185,6 +363,9 @@
           <Property Name="LayoutID" Type="Guid" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ItemRenderings" Relationship="DemoModel.FK_ItemRenderings_Presentations" FromRole="Presentation" ToRole="ItemRendering" />
+          <NavigationProperty Name="Item" Relationship="DemoModel.FK_Presentations_Items" FromRole="Presentation" ToRole="Item" />
+          <NavigationProperty Name="Layout" Relationship="DemoModel.FK_Presentations_Layouts" FromRole="Presentation" ToRole="Layout" />
         </EntityType>
         <EntityType Name="Property">
           <Key>
@@ -197,6 +378,8 @@
           <Property Name="Language" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Field" Relationship="DemoModel.FK_Properties_Fields" FromRole="Property" ToRole="Field" />
+          <NavigationProperty Name="Item" Relationship="DemoModel.FK_Properties_Items" FromRole="Property" ToRole="Item" />
         </EntityType>
         <EntityType Name="Rendering">
           <Key>
@@ -209,6 +392,7 @@
           <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ItemRenderings" Relationship="DemoModel.FK_ItemRenderings_Renderings" FromRole="Rendering" ToRole="ItemRendering" />
         </EntityType>
         <EntityType Name="Template">
           <Key>
@@ -218,18 +402,207 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Fields" Relationship="DemoModel.FK_Fields_Templates" FromRole="Template" ToRole="Field" />
+          <NavigationProperty Name="Items" Relationship="DemoModel.FK_Items_Templates" FromRole="Template" ToRole="Item" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Fields" EntityType="Self.Field" />
           <EntitySet Name="ItemRenderings" EntityType="Self.ItemRendering" />
           <EntitySet Name="Items" EntityType="Self.Item" />
           <EntitySet Name="Layouts" EntityType="Self.Layout" />
-          <EntitySet Name="Links" EntityType="Self.Link" />
           <EntitySet Name="Presentations" EntityType="Self.Presentation" />
           <EntitySet Name="Properties" EntityType="Self.Property" />
           <EntitySet Name="Renderings" EntityType="Self.Rendering" />
           <EntitySet Name="Templates" EntityType="Self.Template" />
+          <AssociationSet Name="FK_Fields_Templates" Association="DemoModel.FK_Fields_Templates">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="Field" EntitySet="Fields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Fields" Association="DemoModel.FK_Properties_Fields">
+            <End Role="Field" EntitySet="Fields" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemRenderings_Items" Association="DemoModel.FK_ItemRenderings_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="ItemRendering" EntitySet="ItemRenderings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemRenderings_Presentations" Association="DemoModel.FK_ItemRenderings_Presentations">
+            <End Role="Presentation" EntitySet="Presentations" />
+            <End Role="ItemRendering" EntitySet="ItemRenderings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemRenderings_Renderings" Association="DemoModel.FK_ItemRenderings_Renderings">
+            <End Role="Rendering" EntitySet="Renderings" />
+            <End Role="ItemRendering" EntitySet="ItemRenderings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Items" Association="DemoModel.FK_Items_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Item1" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_Templates" Association="DemoModel.FK_Items_Templates">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presentations_Items" Association="DemoModel.FK_Presentations_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Presentation" EntitySet="Presentations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Properties_Items" Association="DemoModel.FK_Properties_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Property" EntitySet="Properties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presentations_Layouts" Association="DemoModel.FK_Presentations_Layouts">
+            <End Role="Layout" EntitySet="Layouts" />
+            <End Role="Presentation" EntitySet="Presentations" />
+          </AssociationSet>
+          <EntitySet Name="Links" EntityType="DemoModel.Link" />
+          <AssociationSet Name="FK_Links_Items" Association="DemoModel.FK_Links_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Link" EntitySet="Links" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Fields_Templates">
+          <End Type="DemoModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="DemoModel.Field" Role="Field" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Field">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Fields">
+          <End Type="DemoModel.Field" Role="Field" Multiplicity="1" />
+          <End Type="DemoModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="FieldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemRenderings_Items">
+          <End Type="DemoModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="DemoModel.ItemRendering" Role="ItemRendering" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemRendering">
+              <PropertyRef Name="SourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemRenderings_Presentations">
+          <End Type="DemoModel.Presentation" Role="Presentation" Multiplicity="1" />
+          <End Type="DemoModel.ItemRendering" Role="ItemRendering" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemRendering">
+              <PropertyRef Name="PresentationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemRenderings_Renderings">
+          <End Type="DemoModel.Rendering" Role="Rendering" Multiplicity="1" />
+          <End Type="DemoModel.ItemRendering" Role="ItemRendering" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rendering">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemRendering">
+              <PropertyRef Name="RenderingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Items">
+          <End Type="DemoModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="DemoModel.Item" Role="Item1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_Templates">
+          <End Type="DemoModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="DemoModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presentations_Items">
+          <End Type="DemoModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="DemoModel.Presentation" Role="Presentation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Presentation">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Properties_Items">
+          <End Type="DemoModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="DemoModel.Property" Role="Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presentations_Layouts">
+          <End Type="DemoModel.Layout" Role="Layout" Multiplicity="1" />
+          <End Type="DemoModel.Presentation" Role="Presentation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layout">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Presentation">
+              <PropertyRef Name="LayoutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ItemID" Type="Guid" Nullable="false" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Item" Relationship="DemoModel.FK_Links_Items" FromRole="Link" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK_Links_Items">
+          <End Type="DemoModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="DemoModel.Link" Role="Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Link">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -286,17 +659,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Links">
-            <EntityTypeMapping TypeName="DemoModel.Link">
-              <MappingFragment StoreEntitySet="Links">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Updated" ColumnName="Updated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Presentations">
             <EntityTypeMapping TypeName="DemoModel.Presentation">
               <MappingFragment StoreEntitySet="Presentations">
@@ -341,6 +703,17 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="DemoModel.Link">
+              <MappingFragment StoreEntitySet="Links">
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

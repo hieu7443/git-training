@@ -1,4 +1,5 @@
 ﻿using CustomMvc.Foundation.Extensions;
+using CustomMvc.Foundation.Models;
 using CustomMvc.Foundation.Rendering;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace CustomMvc.Foundation.Controllers
     {
         private void RenderRequestContext(RequestContext requestContext, string[] paths, ref string controllerName)
         {
+            controllerName = "_Base";
             string action = "Index";
             if (paths.FirstOrDefault() == "api")
             {
@@ -24,13 +26,19 @@ namespace CustomMvc.Foundation.Controllers
             }
             else
             {
-                string controller = "CustomFeature.Controllers.CustomFeatureController";
-                string assembly = "CustomFeature";
-                Type controllerType = Type.GetType($"{controller}, {assembly}");
-                controllerName = controllerType.GetControllerName();
+                Item item = Repository.GetItem(String.Join("/", paths));
+                if (item == null || item.Presentation == null)
+                    throw new HttpException((int)HttpStatusCode.NotFound, "Not found");
+                RenderCustomContext(item);
             }
             requestContext.RouteData.Values["controller"] = controllerName; //just for show on futher processes
             requestContext.RouteData.Values["action"] = action;
+        }
+        private void RenderCustomContext(Item item)
+        {
+            CustomContext.Current = item;
+            CustomContext.Presentation = item.Presentation;
+            CustomContext.ProcessedPlaceholders = new List<string>();
         }
         private string[] GetRequestPaths(RequestContext requestContext)
         {

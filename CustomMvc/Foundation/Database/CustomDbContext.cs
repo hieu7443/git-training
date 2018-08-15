@@ -8,12 +8,11 @@ namespace CustomMvc.Foundation.Database
 {
     internal class CustomDbContext : Entities
     {
-        internal CustomDbContext() : base()
+        public CustomDbContext() : base(_ConnectionString)
         {
-            Database.Connection.ConnectionString = _ConnectionString;
         }
         private static string _ConnectionString { get; set; }
-        internal static void SetConnectionString(string connectionString)
+        public static void SetConnectionString(string connectionString)
         {
             _ConnectionString = connectionString;
         }

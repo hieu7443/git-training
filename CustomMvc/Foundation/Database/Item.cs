@@ -14,11 +14,34 @@ namespace CustomMvc.Foundation.Database
     
     public partial class Item
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Item()
+        {
+            this.ItemRenderings = new HashSet<ItemRendering>();
+            this.Childs = new HashSet<Item>();
+            this.Presentations = new HashSet<Presentation>();
+            this.Properties = new HashSet<Property>();
+            this.Links = new HashSet<Link>();
+        }
+    
         public System.Guid ID { get; set; }
         public string Name { get; set; }
         public System.Guid TemplateID { get; set; }
-        public System.Guid ParentID { get; set; }
+        public Nullable<System.Guid> ParentID { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Updated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemRendering> ItemRenderings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Item> Childs { get; set; }
+        public virtual Item Parent { get; set; }
+        public virtual Template Template { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Presentation> Presentations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Property> Properties { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Link> Links { get; set; }
     }
 }

@@ -19,10 +19,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/04/2018 11:04:01</publishTime>
     </File>
     <File Include="bin/CustomMvc.dll">
-      <publishTime>08/14/2018 17:33:25</publishTime>
+      <publishTime>08/15/2018 17:36:24</publishTime>
     </File>
     <File Include="bin/CustomMvc.pdb">
-      <publishTime>08/14/2018 17:33:25</publishTime>
+      <publishTime>08/15/2018 17:36:24</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/04/2015 07:43:42</publishTime>
@@ -145,7 +145,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/04/2018 11:04:42</publishTime>
     </File>
     <File Include="Foundation/Database/Models.edmx.diagram">
-      <publishTime>08/14/2018 16:16:43</publishTime>
+      <publishTime>08/15/2018 14:26:22</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>06/04/2018 11:03:45</publishTime>
@@ -184,7 +184,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/04/2018 11:27:32</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/14/2018 11:50:17</publishTime>
+      <publishTime>08/15/2018 17:44:24</publishTime>
     </File>
     <File Include="Views/web.config">
       <publishTime>06/05/2018 10:32:43</publishTime>
@@ -193,7 +193,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/04/2018 11:04:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/14/2018 17:33:25</publishTime>
+      <publishTime>08/15/2018 16:42:57</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -19,26 +19,26 @@ namespace CustomMvc.Foundation
                 HttpContext.Current.Items[Constants.CurrentRenderingItem] = value;
             }
         }
-        public static IRendering[] RenderingList
+        public static IPresentation Presentation
         {
             get
             {
-                return (IRendering[])HttpContext.Current.Items[Constants.RenderingList];
+                return (IPresentation)HttpContext.Current.Items[Constants.Presentation];
             }
             set
             {
-                HttpContext.Current.Items[Constants.CurrentRenderingItem] = value;
+                HttpContext.Current.Items[Constants.Presentation] = value;
             }
         }
-        public static ILayout Layout
+        public static List<string> ProcessedPlaceholders
         {
             get
             {
-                return (ILayout)HttpContext.Current.Items[Constants.Layout];
+                return (List<string>)HttpContext.Current.Items[Constants.ProcessedPlaceholders];
             }
             set
             {
-                HttpContext.Current.Items[Constants.Layout] = value;
+                HttpContext.Current.Items[Constants.ProcessedPlaceholders] = value;
             }
         }
     }

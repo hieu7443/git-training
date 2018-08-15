@@ -10,11 +10,11 @@ using System.Xml.Linq;
 
 namespace CustomMvc.Foundation.Controllers
 {
-    public class BaseController : Controller
+    public class _BaseController : Controller
     {
         public ActionResult Index()
         {
-            return View(CustomContext.Layout.Source);
+            return View(CustomContext.Presentation.Layout.Source);
         }
         public ActionResult Sitemap()
         {
